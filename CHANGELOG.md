@@ -6,7 +6,7 @@
 
 ## [Unreleased][]
 ### Added
-
+- Allows calling a forced menu entry routine even without using mouse tracking. If it fails, logs to console. btn_up(x, y, object, forcedEntry)
 ### Changed
 
 ### Removed
