@@ -53,7 +53,7 @@ function on_mouse_rbtn_up(x, y) {return menu.btn_up(x, y);}
 
 ![menu_framework_01](https://user-images.githubusercontent.com/83307074/117211823-081c7500-ade9-11eb-9178-f063539809a4.gif)
 
-There are more usage examples and full documentation on the header of 'menu_xxx.js'.
+There are more usage examples on the 'examples' folder and full documentation on the header of 'menu_xxx.js'.
 
 ## Other implementations
  1. [Playlist-Tools-SMP](https://github.com/regorxxx/Playlist-Tools-SMP): Different tools for [foobar2000](https://www.foobar2000.org). The dynamic configurable menu is built using this.
@@ -62,16 +62,7 @@ There are more usage examples and full documentation on the header of 'menu_xxx.
 ![Animation9](https://user-images.githubusercontent.com/83307074/116756215-44239480-a9fb-11eb-8489-b56a178c70f4.gif)
 
 ## Installation
-Copy all files from the zip into YOUR_FOOBAR_PROFILE_PATH\scripts\SMP\xxx-scripts  
-Any other path WILL NOT work without editing the scripts. (see images\_Installation_*jpg)  
-For ex: mine is c:\Users\xxx\AppData\Roaming\foobar2000\scripts\SMP\xxx-scripts\...  
-For portable installations >= 1.6: .\foobar2000\profile\scripts\SMP\xxx-scripts\...  
-For portable installations <= 1.5: .\foobar2000\scripts\SMP\xxx-scripts\...  
-Then load any button script into a SMP panel within foobar.  
-
-Since the framework only requires 2 files, i.e. the main one and the helper... it's pretty easy to adjust the include paths to whatever it's preferred.
-
-![menu_framework_02](https://user-images.githubusercontent.com/83307074/117211962-3437f600-ade9-11eb-93d6-e5508767cf3b.png)
+Since the framework only requires 1 file, i.e. the main one.. you can simply include it along any other script where you will use the menu.
 
 [changelog]: CHANGELOG.md
 [version_badge]: https://img.shields.io/github/release/regorxxx/Menu-Framework-SMP.svg
