@@ -13,7 +13,8 @@
 ## [1.1.0] - 2021-05-19
 ### Added
 - New examples.
-- Allows calling a forced menu entry routine even without using mouse tracking. If it fails, logs to console. btn_up(x, y, object, forcedEntry).
+- Allows calling a forced menu entry routine even without using mouse tracking. If it fails, logs to console. btn_up(x, y, \[object\], forcedEntry).
+- Multiple menu concatenation using btn_up(x, y, \[object\], forcedEntry), where \[object\] may be another menu object or an array of menus. It should allow sharing the same menu code in multiple scripts easily (or optional menus).
 ### Changed
 - Moved dependencies to main file.
 ### Removed
