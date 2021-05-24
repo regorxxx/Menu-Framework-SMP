@@ -53,24 +53,30 @@
 include(fb.ComponentPath + 'docs\\Flags.js');
 
 function _menu({bSupressDefaultMenu = true, idxInitial = 0, properties = null} = {}) {
+	var menuArrTemp = [];
 	var menuArr = [];
 	var menuMap = new Map();
+	
 	var entryArrTemp = [];
 	var entryArr = [];
-	var entryMap = new Map();
+	var condEntryArrTemp = [];
 	var condEntryArr = [];
-	var idxMap = new Map();
-	var checkMenuMap = new Map();
+	var entryMap = new Map();
+	
+	var checkMenuArrTemp = [];
 	var checkMenuArr = [];
+	var checkMenuMap = new Map();
+	
+	var idxMap = new Map();
 	var idx = idxInitial;
 	
 	this.properties = properties; // To simplify usage along other scripts
 	
 	// To create new elements
-	this.newMenu = (menuName = 'main', subMenuFrom = 'main') => {
+	this.newMenu = (menuName = 'main', subMenuFrom = 'main', flags = MF_STRING) => {
 		if (menuName === subMenuFrom) {subMenuFrom = '';}
 		menuArr.push({menuName, subMenuFrom});
-		if (menuArr.length > 1) {entryArr.push({menuName, subMenuFrom, bIsMenu: true});}
+		if (menuArr.length > 1) {entryArr.push({menuName, subMenuFrom, flags, bIsMenu: true});}
 		return menuName;
 	}
 	this.newMenu(); // Default menu
@@ -120,12 +126,18 @@ function _menu({bSupressDefaultMenu = true, idxInitial = 0, properties = null} =
 	}
 	
 	this.checkMenu = (menuName, entryTextA, entryTextB, idxFunc) => {
-		checkMenuMap.set(menuName, () => {
-			if (_isFunction(menuName)) {menuName = menuName();}
-			if (_isFunction(entryTextA)) {entryTextA = entryTextA();}
+		if (_isFunction(menuName)) {menuName = menuName();}
+		if (_isFunction(entryTextA)) {entryTextA = entryTextA();}
+		if (entryTextB) { // Radio check
 			if (_isFunction(entryTextB)) {entryTextB = entryTextB();}
-			return menuMap.get(menuName).CheckMenuRadioItem(this.getIdx(entryTextA), this.getIdx(entryTextB), this.getIdx(entryTextA) + idxFunc());
-		});
+			checkMenuMap.set(menuName, () => {
+				return menuMap.get(menuName).CheckMenuRadioItem(this.getIdx(entryTextA), this.getIdx(entryTextB), this.getIdx(entryTextA) + idxFunc());
+			});
+		} else { // Item check
+			checkMenuMap.set(menuName + entryTextA, () => {
+				return menuMap.get(menuName).CheckMenuItem(this.getIdx(entryTextA), idxFunc());
+			});
+		}
 	}
 	
 	this.concat = (menuObj) => {
@@ -135,6 +147,9 @@ function _menu({bSupressDefaultMenu = true, idxInitial = 0, properties = null} =
 	this.btn_up = (x, y, object, forcedEntry = '') => {
 		// Add conditional entries/menus
 		entryArrTemp = [...entryArr]; // Create backup to restore later
+		menuArrTemp = [...menuArr];
+		condEntryArrTemp = [...condEntryArr];
+		checkMenuArrTemp = [...checkMenuArr];
 		// Call other object's menu creation. It allows multiple instances of this framework, either manually appending items
 		// or an entire new instance. Separators may be added too.
 		let objectArr = [];
@@ -171,8 +186,9 @@ function _menu({bSupressDefaultMenu = true, idxInitial = 0, properties = null} =
 			} else { // Append sub-menus
 				const subMenuName = _isFunction(entry.menuName) ? entry.menuName() : entry.menuName;
 				if (subMenuName !== menuArr[0].menuName) {
+					const flags = _isFunction(entry.flags) ? entry.flags() : entry.flags;
 					const subMenuFrom = _isFunction(entry.subMenuFrom) ? entry.subMenuFrom() : entry.subMenuFrom;
-					this.getMenu(subMenuName).AppendTo(this.getMenu(subMenuFrom), MF_STRING, subMenuName);
+					this.getMenu(subMenuName).AppendTo(this.getMenu(subMenuFrom), flags, subMenuName);
 				}
 			}
 		});
@@ -217,11 +233,21 @@ function _menu({bSupressDefaultMenu = true, idxInitial = 0, properties = null} =
 	}
 	
 	this.clear = () => {
+		// These should be always cleared and created again on every call
 		menuMap.clear();
 		entryMap.clear();
 		idxMap.clear();
+		checkMenuMap.clear();
+		// Since menu is cleared on every call too, entry arrays are cleared whenever this.clear is called from the outside
+		// Otherwise they are reused on next call
 		entryArr = [...entryArrTemp];
 		entryArrTemp = [];
+		menuArr = [...menuArrTemp];
+		menuArrTemp = [];
+		condEntryArr = [...condEntryArrTemp];
+		condEntryArrTemp = [];
+		checkMenuArr = [...checkMenuArrTemp];
+		checkMenuArrTemp = [];
 		idx = 0;
 	}
 }

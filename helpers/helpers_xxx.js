@@ -254,6 +254,8 @@ function _copyFile(oldFilePath, newFilePath) {
 }
 
 // Sends file to recycle bin, can be undone
+// Beware of calling this while pressing shift. File will be removed without sending to recycle bin!
+// Use utils.IsKeyPressed(VK_SHIFT) and debouncing as workaround
 function _recycleFile(file) {
 	if (_isFile(file)) {
 		try {
@@ -722,54 +724,28 @@ function savePlaylist(playlistIndex, playlistPath, extension = '.m3u8', playlist
 }
 
 function addHandleToPlaylist(handleList, playlistPath, relPath = '') {
-	const extension = isCompatible('1.4.0') ? utils.SplitFilePath(file)[2] : utils.FileTest(file, 'split')[2]; //TODO: Deprecated
+	const extension = isCompatible('1.4.0') ? utils.SplitFilePath(playlistPath)[2] : utils.FileTest(playlistPath, 'split')[2]; //TODO: Deprecated
 	if (!writablePlaylistFormats.has(extension)){
 		console.log('addHandleToPlaylist(): Wrong extension set \'' + extension + '\', only allowed ' + Array.from(writablePlaylistFormats).join(', '));
 		return false;
 	}
-	if (!_isFile(playlistPath)) {
-		let trackText = [];
-		let addSize = handleList.Count;
-		// -------------- m3u
-		if (extension === '.m3u8' || extension === '.m3u') {
-			// Tracks text
-			if (addSize !== 0) {
-				const repl = '.\\';
-				const tfo = fb.TitleFormat('#EXTINF:%_length_seconds%,%artist% - %title%$crlf()' + (relPath.length ? '$replace(%path%,\'' + relPath + '\',' + repl + ')' : '%path%'));
-				trackText = tfo.EvalWithMetadbs(handleList);
-			} else { //  Else empty handle
-				return false;
-			} 
-		// ---------------- PLS
-		} else if (extension === '.pls') { // The standard doesn't allow comments... so no UUID here.
-			if (addSize !== 0) { // Tracks from playlist
-				// Tracks text
-				const repl = '.\\';
-				const tfo = fb.TitleFormat('File#placeholder#=' + (relPath.length ? '$replace(%path%,\'' + relPath + '\',' + repl + ')' : '%path%')  + '$crlf()Title#placeholder#=%title%' + '$crlf()Length#placeholder#=%_length_seconds%');
-				trackText = tfo.EvalWithMetadbs(handleList);
-				//Fix file numbering since foobar doesn't output list index...
-				let trackTextLength = trackText.length;
-				for (let i = 0; i < trackTextLength; i++) { // It appears 3 times...
-					trackText[i] = trackText[i].replace('#placeholder#', i + 1).replace('#placeholder#', i + 1).replace('#placeholder#', i + 1);
-					trackText[i] += '\r\n'; // EoL after every track info group... just for readability
-				}
-			} else { //  Else empty handle
-				return false;
-			} 
-		}
+	if (_isFile(playlistPath)) {
 		// Read original file
 		let originalText = utils.ReadTextFile(playlistPath).split('\r\n');
 		let bFound = false;
+		let addSize = handleList.Count;
+		let trackText = [];
+		let size;
 		if (typeof originalText !== 'undefined' && originalText.length) { // We don't check if it's a playlist by its content! Can break things if used wrong...
 			let lines = originalText.length;
 			if (extension === '.m3u8' || extension === '.m3u') {
+				bFound = true; // no check for m3u8 since it can be anything
 				let j = 0;
 				while (j < lines) { // Changes size Line
 					if (originalText[j].startsWith('#PLAYLISTSIZE:')) {
 						size = Number(originalText[j].split(':')[1]);
-						let newSize = size + addSize;
+						const newSize = size + addSize;
 						originalText[j] = '#PLAYLISTSIZE:' + newSize;
-						bFound = true;
 						break;
 					}
 					j++;
@@ -780,7 +756,7 @@ function addHandleToPlaylist(handleList, playlistPath, relPath = '') {
 					bFound = true;
 					// End of Footer
 					size = Number(originalText[lines - 2].split('=')[1]);
-					let newSize = size + addSize;
+					const newSize = size + addSize;
 					trackText.push('NumberOfEntries=' + newSize);
 					trackText.push('Version=2');
 					originalText.pop(); //Removes old NumberOfEntries=..
@@ -789,10 +765,38 @@ function addHandleToPlaylist(handleList, playlistPath, relPath = '') {
 			}
 		}
 		if (!bFound) {return false;} // Safety check
+		// New text
+		// -------------- m3u
+		if (extension === '.m3u8' || extension === '.m3u') {
+			// Tracks text
+			if (addSize !== 0) {
+				const repl = '.\\';
+				const tfo = fb.TitleFormat('#EXTINF:%_length_seconds%,%artist% - %title%$crlf()' + (relPath.length ? '$replace(%path%,\'' + relPath + '\',' + repl + ')' : '%path%'));
+				trackText = [...tfo.EvalWithMetadbs(handleList), ...trackText]
+			} else { //  Else empty handle
+				return false;
+			} 
+		// ---------------- PLS
+		} else if (extension === '.pls') { // The standard doesn't allow comments... so no UUID here.
+			if (addSize !== 0) { // Tracks from playlist
+				// Tracks text
+				const repl = '.\\';
+				const tfo = fb.TitleFormat('File#placeholder#=' + (relPath.length ? '$replace(%path%,\'' + relPath + '\',' + repl + ')' : '%path%')  + '$crlf()Title#placeholder#=%title%' + '$crlf()Length#placeholder#=%_length_seconds%');
+				trackText = [...tfo.EvalWithMetadbs(handleList), ...trackText];
+				//Fix file numbering since foobar doesn't output list index...
+				let trackTextLength = trackText.length;
+				for (let i = 0; i < trackTextLength - 2; i++) { // It appears 3 times per track...
+					trackText[i] = trackText[i].replace('#placeholder#', size + 1).replace('#placeholder#', size + 1).replace('#placeholder#', size + 1);
+					trackText[i] += '\r\n'; // EoL after every track info group... just for readability
+				}
+			} else { //  Else empty handle
+				return false;
+			} 
+		}
 		// Write to file
 		trackText = trackText.join('\r\n');
 		originalText = originalText.join('\r\n');
-		let playlistText = playlistText.concat(trackText);
+		let playlistText = originalText.concat('\r\n', trackText);
 		let bDone = utils.WriteTextFile(playlistPath, playlistText, true);
 		// Check
 		if (_isFile(playlistPath) && bDone) {
@@ -838,6 +842,14 @@ function getFilePathsFromPlaylist(playlistPath) {
 	return paths;
 }
 
+// Cache paths
+var libItemsAbsPaths = [];
+var libItemsRelPaths = {};
+
+function precacheLibraryPaths() {
+	libItemsAbsPaths = fb.TitleFormat('%path%').EvalWithMetadbs(fb.GetLibraryItems());
+}
+
 // Loading m3u, m3u8 & pls playlist files is really slow when there are many files
 // Better to find matches on the library (by path) and use those! A query or addLocation approach is easily 100x times slower
 function loadTracksFromPlaylist(playlistPath, playlistIndex, relPath = '') {
@@ -849,8 +861,8 @@ function loadTracksFromPlaylist(playlistPath, playlistIndex, relPath = '') {
 	let handlePlaylist = [...Array(playlistLength)];
 	const poolItems = fb.GetLibraryItems();
 	const poolItemsCount = poolItems.Count;
-	const poolItemsAbsPaths = fb.TitleFormat('%path%').EvalWithMetadbs(poolItems);
-	const poolItemsRelPaths = relPath.length ? poolItemsAbsPaths.map((path) => {return path.replace(relPath, '.\\');}) : null; // Faster than tf again
+	const poolItemsAbsPaths = libItemsAbsPaths.length === poolItems.Count ? libItemsAbsPaths : fb.TitleFormat('%path%').EvalWithMetadbs(poolItems);
+	const poolItemsRelPaths = relPath.length ? (libItemsRelPaths.hasOwnProperty(relPath) && libItemsRelPaths[relPath].length === poolItems.Count ? libItemsRelPaths[relPath] : poolItemsAbsPaths.map((path) => {return path.replace(relPath, '.\\');})) : null; // Faster than tf again
 	let pathPool = new Map();
 	let filePool = new Set(filePaths);
 	let path;
@@ -889,31 +901,34 @@ function loadTracksFromPlaylist(playlistPath, playlistIndex, relPath = '') {
 		bDone = true;
 	}
 	test.Print();
+	if (!libItemsAbsPaths.length) {libItemsAbsPaths = poolItemsAbsPaths;}
+	if (relPath.length && (!libItemsRelPaths.hasOwnProperty(relPath) || !libItemsRelPaths[relPath].length)) {libItemsRelPaths[relPath] = poolItemsRelPaths;}
 	return bDone;
 }
 
 // Loading m3u, m3u8 & pls playlist files is really slow when there are many files
 // Better to find matches on the library (by path) and use those! A query or addLocation approach is easily 100x times slower
 function arePathsInMediaLibrary(filePaths, relPath = '') {
+	let test = new FbProfiler('arePathsInMediaLibrary');
 	if (!filePaths.some((path) => {return path.startsWith('.\\');})) {relPath = '';} // No need to check rel paths if they are all absolute
 	const playlistLength = filePaths.length;
 	const poolItems = fb.GetLibraryItems();
 	const poolItemsCount = poolItems.Count;
-	const poolItemsAbsPaths = fb.TitleFormat('%path%').EvalWithMetadbs(poolItems);
-	const poolItemsRelPaths = relPath.length ? poolItemsAbsPaths.map((path) => {return path.replace(relPath, '.\\');}) : null; // Faster than tf again
-	let pathPool = new Map();
-	let filePool = new Set(filePaths);
+	const poolItemsAbsPaths = libItemsAbsPaths.length === poolItems.Count ? libItemsAbsPaths : fb.TitleFormat('%path%').EvalWithMetadbs(poolItems);
+	const poolItemsRelPaths = relPath.length ? (libItemsRelPaths.hasOwnProperty(relPath) && libItemsRelPaths[relPath].length === poolItems.Count ? libItemsRelPaths[relPath] : poolItemsAbsPaths.map((path) => {return path.replace(relPath, '.\\');})) : null; // Faster than tf again
+	let filePool = new Set(filePaths.map((path) => {return path.toLowerCase();}));
 	let path;
+	let count = 0;
 	if (relPath.length) {
 		for (let i = 0; i < poolItemsCount; i++) {
 			path = poolItemsAbsPaths[i].toLowerCase();
 			if (filePool.has(path)) {
-				pathPool.set(path, i);
+				count++;
 				continue;
 			}
 			path = poolItemsRelPaths[i].toLowerCase();
 			if (filePool.has(path)) {
-				pathPool.set(path, i);
+				count++;
 				continue;
 			}
 		}
@@ -921,16 +936,17 @@ function arePathsInMediaLibrary(filePaths, relPath = '') {
 		for (let i = 0; i < poolItemsCount; i++) {
 			path = poolItemsAbsPaths[i].toLowerCase();
 			if (filePool.has(path)) {
-				pathPool.set(path, i);
+				count++;
 				continue;
 			}
 		}
 	}
-	let count = 0;
-	for (let i = 0; i < playlistLength; i++) {
-		if (pathPool.has(filePaths[i])) {count++;}
-	}
-	return count === filePaths.length;
+	test.Print();
+	if (libItemsAbsPaths.length !== poolItems.Count) {libItemsAbsPaths = poolItemsAbsPaths;}
+	if (relPath.length && (!libItemsRelPaths.hasOwnProperty(relPath) || !libItemsRelPaths[relPath].length)) {libItemsRelPaths[relPath] = poolItemsRelPaths;}
+	console.log(count);
+	console.log(playlistLength);
+	return (count === playlistLength);
 }
 
 function loadPlaylists(playlistArray) {
@@ -1229,6 +1245,10 @@ function isArrayNumbers(checkKeys) {
 		}
 	}
 	return true;
+}
+
+function isArrayEqual(arrayA, arrayB) {
+	return new Set(arrayA).isEqual(new Set(arrayB));
 }
 
 // Expects key,value,key,value,...
