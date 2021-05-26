@@ -2,12 +2,22 @@
 
 ## [Table of Contents]
 - [Unreleased](#unreleased)
+- [1.2.0](#110---2021-05-26)
 - [1.1.0](#110---2021-05-19)
 - [1.0.0](#100---2021-05-05)
 
 ## [Unreleased][]
 ### Added
 ### Changed
+### Removed
+### Fixed
+
+## [1.2.0] - 2021-05-26
+### Added
+- Macros: This.lastCall stores the last menu entry name clicked on. (Meant to be used with macros or forced entries)
+### Changed
+- Macros: entryMap now contains entries named according to the menu they reside (menu + '\\' + entryName). That allows to call entries with same name but placed on different submenus at the same time. (Meant to be used with macros or forced entries)
+- This.clear() has as default argument bForce = false; i.e. to totally clear all set menus, must be set to true.
 - This.newCheckMenu(menuName, entryTextA, entryTextB, idxFun) translates into CheckMenuItem(entryTextA, idxFun) when entryTextB is undefined and into CheckMenuRadioItem(entryTextA, entryTextB, idxFun) when both are defined, thus allowing both checking behaviour in the framework. (previously only the second one was allowed). Any checkMenu added with previous versions works without changes.
 ### Removed
 ### Fixed
@@ -31,6 +41,7 @@
 ### Removed
 ### Fixed
 
-[Unreleased]: https://github.com/regorxxx/Menu-Framework-SMP/compare/v1.1.0...HEAD
+[Unreleased]: https://github.com/regorxxx/Menu-Framework-SMP/compare/v1.2.0...HEAD
+[1.2.0]: https://github.com/regorxxx/Menu-Framework-SMP/compare/v1.1.0...v1.2.0
 [1.1.0]: https://github.com/regorxxx/Menu-Framework-SMP/compare/v1.0.0...v1.1.0
 [1.0.0]: https://github.com/regorxxx/Menu-Framework-SMP/compare/1f1ae22...v1.0.0
