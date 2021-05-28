@@ -2,6 +2,7 @@
 
 ## [Table of Contents]
 - [Unreleased](#unreleased)
+- [1.2.1](#121---2021-05-28)
 - [1.2.0](#120---2021-05-26)
 - [1.1.0](#110---2021-05-19)
 - [1.0.0](#100---2021-05-05)
@@ -9,6 +10,16 @@
 ## [Unreleased][]
 ### Added
 ### Changed
+### Removed
+### Fixed
+
+## [1.2.1] - 2021-05-28
+### Added
+- This.getMenus() returns the entire list of menus attached to the menu instance (useful to swith menus on/off on demand).
+- This.lastCall is sent to console on every menu call.
+### Changed
+- Macros: This.lastCall now omits ('main\' or the main menu name) when the entry resides on the main menu. i.e. just use the entry name for main menu entries, and submenu\entry name for the rest.ç
+- Minor code cleanup.
 ### Removed
 ### Fixed
 
@@ -41,7 +52,8 @@
 ### Removed
 ### Fixed
 
-[Unreleased]: https://github.com/regorxxx/Menu-Framework-SMP/compare/v1.2.0...HEAD
+[Unreleased]: https://github.com/regorxxx/Menu-Framework-SMP/compare/v1.2.1...HEAD
+[1.2.1]: https://github.com/regorxxx/Menu-Framework-SMP/compare/v1.2.0...v1.2.1
 [1.2.0]: https://github.com/regorxxx/Menu-Framework-SMP/compare/v1.1.0...v1.2.0
 [1.1.0]: https://github.com/regorxxx/Menu-Framework-SMP/compare/v1.0.0...v1.1.0
 [1.0.0]: https://github.com/regorxxx/Menu-Framework-SMP/compare/1f1ae22...v1.0.0
