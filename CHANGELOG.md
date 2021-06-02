@@ -11,6 +11,7 @@
 ### Added
 ### Changed
 ### Removed
+- helpers_xxx.js file.
 ### Fixed
 
 ## [1.2.1] - 2021-05-28
