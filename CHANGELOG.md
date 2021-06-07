@@ -2,12 +2,19 @@
 
 ## [Table of Contents]
 - [Unreleased](#unreleased)
+- [1.2.2](#122---2021-06-07)
 - [1.2.1](#121---2021-05-28)
 - [1.2.0](#120---2021-05-26)
 - [1.1.0](#110---2021-05-19)
 - [1.0.0](#100---2021-05-05)
 
 ## [Unreleased][]
+### Added
+### Changed
+### Removed
+### Fixed
+
+## [1.2.2] - 2021-06-07
 ### Added
 ### Changed
 - 'entryMap' now stores menu names with anything after tabs '\t' stripped. i.e. you can add extra variable info tabbed to the right (like shortcuts) to the menu names without it being reflected on .lastCall. Makes easier to work with macros or shortcuts, since changing that part of the string will still output the same "entry name". menu.btn_up(void(0), void(0), void(0), 'Playlist History\\Previous playlist') and menu.btn_up(void(0), void(0), void(0), 'Playlist History\\Previous playlist\tCtrl + R') would be equivalent.
@@ -54,7 +61,8 @@
 ### Removed
 ### Fixed
 
-[Unreleased]: https://github.com/regorxxx/Menu-Framework-SMP/compare/v1.2.1...HEAD
+[Unreleased]: https://github.com/regorxxx/Menu-Framework-SMP/compare/v1.2.2...HEAD
+[1.2.2]: https://github.com/regorxxx/Menu-Framework-SMP/compare/v1.2.1...v1.2.2
 [1.2.1]: https://github.com/regorxxx/Menu-Framework-SMP/compare/v1.2.0...v1.2.1
 [1.2.0]: https://github.com/regorxxx/Menu-Framework-SMP/compare/v1.1.0...v1.2.0
 [1.1.0]: https://github.com/regorxxx/Menu-Framework-SMP/compare/v1.0.0...v1.1.0
