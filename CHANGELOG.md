@@ -10,6 +10,7 @@
 ## [Unreleased][]
 ### Added
 ### Changed
+- 'entryMap' now stores menu names with anything after tabs '\t' stripped. i.e. you can add extra variable info tabbed to the right (like shortcuts) to the menu names without it being reflected on .lastCall. Makes easier to work with macros or shortcuts, since changing that part of the string will still output the same "entry name". menu.btn_up(void(0), void(0), void(0), 'Playlist History\\Previous playlist') and menu.btn_up(void(0), void(0), void(0), 'Playlist History\\Previous playlist\tCtrl + R') would be equivalent.
 ### Removed
 - helpers_xxx.js file.
 ### Fixed
@@ -19,7 +20,7 @@
 - This.getMenus() returns the entire list of menus attached to the menu instance (useful to swith menus on/off on demand).
 - This.lastCall is sent to console on every menu call.
 ### Changed
-- Macros: This.lastCall now omits ('main\' or the main menu name) when the entry resides on the main menu. i.e. just use the entry name for main menu entries, and submenu\entry name for the rest.ç
+- Macros: This.lastCall now omits ('main\' or the main menu name) when the entry resides on the main menu. i.e. just use the entry name for main menu entries, and submenu\entry name for the rest.
 - Minor code cleanup.
 ### Removed
 ### Fixed
