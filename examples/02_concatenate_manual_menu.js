@@ -1,6 +1,6 @@
 "use strict";
 
-include(fb.ProfilePath + 'scripts\\SMP\\xxx-scripts\\helpers\\menu_xxx.js');
+include('..\\helpers\\menu_xxx.js');
 
 include('01_simple_menu.js'); // Uses the first menu and the next one as 'otherObj'
 

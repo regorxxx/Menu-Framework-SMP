@@ -62,7 +62,7 @@ There are more usage examples on the 'examples' folder and full documentation on
 ![Animation9](https://user-images.githubusercontent.com/83307074/116756215-44239480-a9fb-11eb-8489-b56a178c70f4.gif)
 
 ## Installation
-Since the framework only requires 1 file, i.e. the main onem you can simply include it along any other script where you will use the menu.
+Since the framework only requires 1 file, i.e. the main one, you can simply include it along any other script where you will use the menu.
 
 ![carbon(5)](https://user-images.githubusercontent.com/83307074/118840446-ed510280-b8b6-11eb-894d-e7d834d4b3b9.png)
 

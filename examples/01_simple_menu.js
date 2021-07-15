@@ -1,6 +1,6 @@
 "use strict";
 
-include(fb.ProfilePath + 'scripts\\SMP\\xxx-scripts\\helpers\\menu_xxx.js');
+include('..\\helpers\\menu_xxx.js');
 
 var menu = new _menu();
 menu.newEntry({entryText: 'Hello', func: () => {console.log('Hello')}}); // Shorthand notation

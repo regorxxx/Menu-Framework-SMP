@@ -10,9 +10,14 @@
 
 ## [Unreleased][]
 ### Added
+- Menu framework: added bool variable (bExecute) to .btn_up(x, y, object, forcedEntry = '', bExecute = true, replaceFunc = null, flag = 0) which allows to simulate the menu without executing any related entry function. 
+- Menu framework: added func variable (replaceFunc) to .btn_up(x, y, object, forcedEntry = '', bExecute = true, replaceFunc = null, flag = 0) which allows to replace the related entry function with a custom one, whenever bExecute is also false. Can be used to paste to clipboard entry names easily simulating the menu usage.
+- Menu framework: added flag variable (flag) to .btn_up(x, y, object, forcedEntry = '', bExecute = true, replaceFunc = null, flag = 0) which allows to set SMP TrackPopupMenu's flag.
 ### Changed
+- Menu framework: .initMenu and .btn_up are now 2 separate functions. i.e. the menu can be recreated without having to create the UI elements using .initMenu instead of .btn_up (which also calls .initMenu).
 ### Removed
 ### Fixed
+- Menu framework: '&' char not showing (or making next char underscored) on created dynamic menus (when it was part of a playlist name for ex.), since they were not doubled. Now the framework automatically checks for names with '&' and doubles them ('&&' are skipped), so they are displayed right.
 
 ## [1.2.2] - 2021-06-07
 ### Added
