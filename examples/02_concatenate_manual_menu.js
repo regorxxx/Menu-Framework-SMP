@@ -16,20 +16,20 @@ function _anotherMenu() {
         menu.getMenu(menuName).AppendMenuItem(MF_STRING, ++this.idxEnd, 'Manual entry 1');
 		menu.getMenu(menuName).AppendMenuItem(MF_STRING, ++this.idxEnd, 'Manual entry 2');
         return this.idxEnd;
-    }
+    };
     
     this.btn_up_done = (currIdx) => {
 		this.idxEnd = this.idxInitial;
-        if (currIdx == ++this.idxEnd) {
+        if (currIdx === ++this.idxEnd) {
             console.log('Manual entry 1');
             return;
         }
-        if (currIdx == ++this.idxEnd) {
+        if (currIdx === ++this.idxEnd) {
             console.log('Manual entry 2');
             return;
         }
 		return;
-    }
+    };
 }
 
 var otherObj = menuTwo;

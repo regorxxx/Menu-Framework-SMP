@@ -3,8 +3,8 @@
 include('..\\helpers\\menu_xxx.js');
 
 var menu = new _menu();
-menu.newEntry({entryText: 'Hello', func: () => {console.log('Hello')}}); // Shorthand notation
-menu.newEntry({entryText: 'Hello 2', func: () => {console.log('Hello 2')}}); // Or omit the menu, to append directly to main one
+menu.newEntry({entryText: 'Hello', func: () => {console.log('Hello');}}); // Shorthand notation
+menu.newEntry({entryText: 'Hello 2', func: () => {console.log('Hello 2');}}); // Or omit the menu, to append directly to main one
 menu.newEntry({entryText: 'sep'});
 const subMenu = menu.newMenu('This is a submenu'); // It will be added just after the last declared entry!
 menu.newEntry({menuName: subMenu, entryText: 'This is my func', func: yourFunc});
