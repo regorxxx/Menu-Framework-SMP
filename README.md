@@ -42,8 +42,7 @@ var bSubMenu = true;
 const funct = () => {return (bSubMenu) ? 'SubMenu 1' : 'SubMenu 2';};
 menu.newMenu(funct);
 menu.newEntry({menuName: funct, entryText: 'Change SubMenu', func: () => {bSubMenu = !bSubMenu}});
-menu.newEntry({m
-enuName: funct, entryText:'Hola 3', func: () => {console.log('Hola3')}, flags: () => {return (bSubMenu) ? MF_STRING : MF_GRAYED}});
+menu.newEntry({menuName: funct, entryText:'Hola 3', func: () => {console.log('Hola3')}, flags: () => {return (bSubMenu) ? MF_STRING : MF_GRAYED}});
 ```
 
 Finally, lets call it with a callback:

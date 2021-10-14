@@ -19,6 +19,7 @@
 ### Removed
 ### Fixed
 - Menu framework: '&' char not showing (or making next char underscored) on created dynamic menus (when it was part of a playlist name for ex.), since they were not doubled. Now the framework automatically checks for names with '&' and doubles them ('&&' are skipped), so they are displayed right.
+- Menu framework: Menu entry checks were not being cleared properly when forcing a reset ('menu.clear(true)'), usually used on menus which are created and deleted every time they are called. This was only a problem when the menu entries' names changed on consecutive calls, for ex. when adding invisible chars at menu names.
 
 ## [1.2.2] - 2021-06-07
 ### Added
