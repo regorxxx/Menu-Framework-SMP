@@ -2,6 +2,7 @@
 
 ## [Table of Contents]
 - [Unreleased](#unreleased)
+- [2.0.1](#201---2021-12-23)
 - [2.0.0](#200---2021-10-14)
 - [1.2.2](#122---2021-06-07)
 - [1.2.1](#121---2021-05-28)
@@ -14,6 +15,15 @@
 ### Changed
 ### Removed
 ### Fixed
+
+## [2.0.1] - 2021-12-23
+### Added
+- iMaxMenuLen: menu can be initialized with a fixed entry text length for displaying purposes. Entries will be cut to such length and added '...' to the end when they are cut. ':' is also maintained at the end when edited. For ex: 'Varied Styles/Genres mix, within a decade' - > 'Varied Styles/Genres mix, ...'. 'Check errors on current playlist:' - > 'Check errors on current...:'. Internal names preserve the original full length string, and that's what's used to call the menu entry or when reporting it to console.
+### Changed
+- hasMenu: allows a second argument pointing to its main menu (subMenuFrom). Leave it blank to look for the menu at any place. hasMenu(menuName, subMenuFrom = '')
+### Removed
+### Fixed
+- hasMenu: not working as expected, always returning false.
 
 ## [2.0.0] - 2021-10-14
 ### Added
@@ -75,7 +85,8 @@
 ### Removed
 ### Fixed
 
-[Unreleased]: https://github.com/regorxxx/Menu-Framework-SMP/compare/v2.0.0...HEAD
+[Unreleased]: https://github.com/regorxxx/Menu-Framework-SMP/compare/v2.0.1...HEAD
+[2.0.1]: https://github.com/regorxxx/Menu-Framework-SMP/compare/v2.0.0...v2.0.1
 [2.0.0]: https://github.com/regorxxx/Menu-Framework-SMP/compare/v1.2.2...v2.0.0
 [1.2.2]: https://github.com/regorxxx/Menu-Framework-SMP/compare/v1.2.1...v1.2.2
 [1.2.1]: https://github.com/regorxxx/Menu-Framework-SMP/compare/v1.2.0...v1.2.1
