@@ -12,7 +12,11 @@
 
 ## [Unreleased][]
 ### Added
+- iMaxTabLen: similar to 'iMaxEntryLen' menu can be initialized with a fixed entry text length for displaying purposes. This variable will cut anything found after '\t', usually used to display additional values or tips on menus. Menu entry names are now split by '\t' before applying iMaxMenuLen and iMaxTabLen max length to both parts. Default value is Infinity, i.e. it will use the full entry name. For ex: 'Allows only these tags on the pool...\tRock, Folk, Blues, Opera' -> 'Allows only these tags on the pool...\tRock, ...'
 ### Changed
+- iMaxMenuLen: renamed to iMaxEntryLen. Default value is now Infinity, i.e. it will use the full entry name.
+- iMaxMenuLen and iMaxTabLen: string cutting now looks for ')', ']', '}' and ':' at the end of both strings to add it again after cutting. Previously it only did so for ':'. For ex: 'Allows only these tags on the pool...\t(Rock, Folk, Blues, Opera)' -> 'Allows only these tags on the pool...\t(Rock, ...)'
+- All entry and menu names passed as arguments to menu construction (newMenu, newEntry, newCheckMenu, newCondEntry) are converted automatically to strings whenever a number/array/object/boolean variable is used. In the case of being a function, it's evaluated just before menu tracking (addToMenu) -i.e. maintains the previous behavior-; the returned value is given the previous treatment, but if a function is returned, then its name (function.name) is used as entry name. Although it's recommended to only pass strings to the menus, this ensures passing arrays, lists or other output from functions which can be converted to string still create valid menu entries. Passing any other value type will throw an error and report the failed entry.
 ### Removed
 ### Fixed
 
