@@ -13,6 +13,7 @@
 ## [Unreleased][]
 ### Added
 - iMaxTabLen: similar to 'iMaxEntryLen' menu can be initialized with a fixed entry text length for displaying purposes. This variable will cut anything found after '\t', usually used to display additional values or tips on menus. Menu entry names are now split by '\t' before applying iMaxMenuLen and iMaxTabLen max length to both parts. Default value is Infinity, i.e. it will use the full entry name. For ex: 'Allows only these tags on the pool...\tRock, Folk, Blues, Opera' -> 'Allows only these tags on the pool...\tRock, ...'
+- bindArgs: added new argument 'bindArgs' to .initMenu(object, bindArgs = null /*{pos: -1, args: null}*/). Works the same than the one at .btn_up(), but the former applies to conditional entries calling. Could be used to run specific conditional entries only on demand.
 ### Changed
 - iMaxMenuLen: renamed to iMaxEntryLen. Default value is now Infinity, i.e. it will use the full entry name.
 - iMaxMenuLen and iMaxTabLen: string cutting now looks for ')', ']', '}' and ':' at the end of both strings to add it again after cutting. Previously it only did so for ':'. For ex: 'Allows only these tags on the pool...\t(Rock, Folk, Blues, Opera)' -> 'Allows only these tags on the pool...\t(Rock, ...)'
