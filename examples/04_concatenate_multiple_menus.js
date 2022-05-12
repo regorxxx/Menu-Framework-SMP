@@ -1,4 +1,4 @@
-"use strict";
+﻿"use strict";
 
 include('..\\helpers\\menu_xxx.js');
 
