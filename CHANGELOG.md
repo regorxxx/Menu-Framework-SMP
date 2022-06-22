@@ -17,6 +17,7 @@
 ### Changed
 ### Removed
 ### Fixed
+- Crash on btn_up() when multiple submenus with same name where added using newMenu(). Now warns about it when calling newMenu() and aborts the addition to avoid later crashing.
 
 ## [2.1.1] - 2022-06-05
 ### Added
