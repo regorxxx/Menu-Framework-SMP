@@ -1,5 +1,5 @@
 ﻿'use strict';
-//21/06/22
+//06/09/22
 
 /* 
 	Contextual Menu helper v2.1.0
@@ -70,6 +70,8 @@ function _menu({bSupressDefaultMenu = true, /*idxInitial = 0,*/ properties = nul
 	let idxMap = new Map();
 	let idx = 0;
 	
+	const separator = /^sep$|^separator$/i;
+	
 	this.properties = properties; // To simplify usage along other scripts
 	this.lastCall = '';
 	
@@ -102,9 +104,12 @@ function _menu({bSupressDefaultMenu = true, /*idxInitial = 0,*/ properties = nul
 	
 	this.newEntry = ({entryText = '', func = null, menuName = menuArr[0].menuName, flags = MF_STRING}) => {
 		const eType = typeof entryText, mType = typeof menuName;
-		if (eTypeToStr.indexOf(eType) !== -1) {entryText = entryText.toString();}
+		if (eTypeToStr.indexOf(eType) !== -1) {	entryText = entryText.toString();}
 		if (eTypeToStr.indexOf(mType) !== -1) {menuName = menuName.toString();}
-		if (eType === 'string' && entryText.indexOf('&') !== - 1) {entryText = entryText.replace(/&&/g,'&').replace(/&/g,'&&');}
+		if (eType === 'string') {
+			if (entryText.indexOf('&') !== - 1) {entryText = entryText.replace(/&&/g,'&').replace(/&/g,'&&');}
+			if (separator.test(entryText)) {func = null; flags = MF_GRAYED;}
+		}
 		if (mType === 'string' && menuName.indexOf('&') !== - 1) {menuName = menuName.replace(/&&/g,'&').replace(/&/g,'&&');}
 		entryArr.push({entryText, func, menuName, flags, bIsMenu: false});
 		return entryArr[entryArr.length -1];
@@ -114,11 +119,13 @@ function _menu({bSupressDefaultMenu = true, /*idxInitial = 0,*/ properties = nul
 		const mType = typeof menuName, eAType = typeof entryTextA, eBType = typeof entryTextB;
 		if (eTypeToStr.indexOf(mType) !== -1) {menuName = menuName.toString();}
 		if (eTypeToStr.indexOf(eAType) !== -1) {entryTextA = entryTextA.toString();}
+		if (eAType === 'string' && separator.test(entryTextA)) {return false;}
 		if (entryTextB !== null && eBType !== 'undefined' && eTypeToStr.indexOf(eBType) !== -1) {entryTextB = entryTextB.toString();}
 		if (eAType === 'string' && entryTextA.indexOf('&') !== - 1) {entryTextA = entryTextA.replace(/&&/g,'&').replace(/&/g,'&&');}
 		if (eBType === 'string' && entryTextB.indexOf('&') !== - 1) {entryTextB = entryTextB.replace(/&&/g,'&').replace(/&/g,'&&');}
 		if (mType === 'string' && menuName.indexOf('&') !== - 1) {menuName = menuName.replace(/&&/g,'&').replace(/&/g,'&&');}
 		checkMenuArr.push({menuName, entryTextA, entryTextB, idxFun});
+		return true;
 	};
 	
 	this.newCondEntry = ({entryText = '', condFunc}) => {
@@ -141,7 +148,7 @@ function _menu({bSupressDefaultMenu = true, /*idxInitial = 0,*/ properties = nul
 	};
 	
 	this.addToMenu = ({entryText = null, func = null, menuName = menuArr[0].menuName, flags = MF_STRING}) => {
-		if (entryText === 'sep' || entryText === 'separator') {menuMap.get(menuName).AppendMenuSeparator();}
+		if (separator.test(entryText)) {menuMap.get(menuName).AppendMenuSeparator();}
 		else {
 			idx++;
 			if (isFunction(menuName)) {menuName = menuName();}
@@ -223,12 +230,12 @@ function _menu({bSupressDefaultMenu = true, /*idxInitial = 0,*/ properties = nul
 			for (const objectMenu of objectArr) {
 				if (compareKeys(this, objectMenu)) { // Another instance of this framework, just merge entries and done
 					this.concat(objectMenu);
-				} else if (objectMenu === 'sep' || objectMenu === 'separator') { // Separator
+				} else if (typeof objectMenu === 'string' && separator.test(objectMenu)) { // Separator
 					this.newEntry({entryText: 'sep'});
 				} else if (objectMenu.hasOwnProperty('btn_up') && objectMenu.hasOwnProperty('btn_up_done')) { // Object with hard-coded methods
 					manualMenuArr.push(objectMenu);
 				} else { // Error
-					console.log('menu_xxx: Tried to merge an external menu withouth known methods (\'' + (typeof objectMenu === 'object' ? JSON.stringify(Object.keys(objectMenu)) : objectMenu) + '\').');
+					console.log('menu_xxx: Tried to merge an external menu without known methods (\'' + (typeof objectMenu === 'object' ? JSON.stringify(Object.keys(objectMenu)) : objectMenu) + '\').');
 				}
 			}
 		}
