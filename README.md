@@ -49,6 +49,10 @@ Finally, lets call it with a callback:
 ```javascript
 function on_mouse_rbtn_up(x, y) {return menu.btn_up(x, y);}
 ```
+Or an [event listener](https://github.com/regorxxx/Callbacks-Framework-SMP):
+```javascript
+addEventListener('on_mouse_rbtn_up', menu.btn_up);
+```
 
 ![menu_framework_01](https://user-images.githubusercontent.com/83307074/117211823-081c7500-ade9-11eb-9178-f063539809a4.gif)
 
