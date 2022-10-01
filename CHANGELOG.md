@@ -2,6 +2,7 @@
 
 ## [Table of Contents]
 - [Unreleased](#unreleased)
+- [2.1.2](#212---2022-10-01)
 - [2.1.1](#211---2022-06-05)
 - [2.1.0](#210---2022-05-19)
 - [2.0.1](#201---2021-12-23)
@@ -15,12 +16,19 @@
 ## [Unreleased][]
 ### Added
 ### Changed
+### Removed
+### Fixed
+
+## [2.1.2] - 2022-10-01
+### Added
+### Changed
 - Reworked separator identification with regexp instead of string matching in all instances, case insensitive.
 - Separator entries passed to 'newCheckMenu' will be skipped; not requiring additional code anymore to split menu creation for standard entries and separators.
 - Improved error reporting.
 ### Removed
 ### Fixed
 - Crash on btn_up() when multiple submenus with same name where added using newMenu(). Now warns about it when calling newMenu() and aborts the addition to avoid later crashing.
+
 
 ## [2.1.1] - 2022-06-05
 ### Added
@@ -109,7 +117,8 @@
 ### Removed
 ### Fixed
 
-[Unreleased]: https://github.com/regorxxx/Menu-Framework-SMP/compare/v2.1.1...HEAD
+[Unreleased]: https://github.com/regorxxx/Menu-Framework-SMP/compare/v2.1.2...HEAD
+[2.1.2]: https://github.com/regorxxx/Menu-Framework-SMP/compare/v2.1.1...v2.1.2
 [2.1.1]: https://github.com/regorxxx/Menu-Framework-SMP/compare/v2.1.0...v2.1.1
 [2.1.0]: https://github.com/regorxxx/Menu-Framework-SMP/compare/v2.0.1...v2.1.0
 [2.0.1]: https://github.com/regorxxx/Menu-Framework-SMP/compare/v2.0.0...v2.0.1
