@@ -2,8 +2,7 @@
 
 ## [Table of Contents]
 - [Unreleased](#unreleased)
-- [2.1.2](#212---2022-10-01)
-- [2.1.1](#211---2022-06-05)
+- [2.1.1](#211---2022-10-01)
 - [2.1.0](#210---2022-05-19)
 - [2.0.1](#201---2021-12-23)
 - [2.0.0](#200---2021-10-14)
@@ -19,7 +18,7 @@
 ### Removed
 ### Fixed
 
-## [2.1.2] - 2022-10-01
+## [2.1.1] - 2022-10-01
 ### Added
 ### Changed
 - Reworked separator identification with regexp instead of string matching in all instances, case insensitive.
@@ -28,14 +27,6 @@
 ### Removed
 ### Fixed
 - Crash on btn_up() when multiple submenus with same name where added using newMenu(). Now warns about it when calling newMenu() and aborts the addition to avoid later crashing.
-
-
-## [2.1.1] - 2022-06-05
-### Added
-### Changed
-- Code cleanup.
-### Removed
-### Fixed
 
 ## [2.1.0] - 2022-05-19
 ### Added
@@ -117,8 +108,7 @@
 ### Removed
 ### Fixed
 
-[Unreleased]: https://github.com/regorxxx/Menu-Framework-SMP/compare/v2.1.2...HEAD
-[2.1.2]: https://github.com/regorxxx/Menu-Framework-SMP/compare/v2.1.1...v2.1.2
+[Unreleased]: https://github.com/regorxxx/Menu-Framework-SMP/compare/v2.1.1...HEAD
 [2.1.1]: https://github.com/regorxxx/Menu-Framework-SMP/compare/v2.1.0...v2.1.1
 [2.1.0]: https://github.com/regorxxx/Menu-Framework-SMP/compare/v2.0.1...v2.1.0
 [2.0.1]: https://github.com/regorxxx/Menu-Framework-SMP/compare/v2.0.0...v2.0.1
