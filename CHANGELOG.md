@@ -17,6 +17,7 @@
 ### Changed
 - Reworked separator identification with regexp instead of string matching in all instances, case insensitive.
 - Separator entries passed to 'newCheckMenu' will be skipped; not requiring additional code anymore to split menu creation for standard entries and separators.
+- Improved error reporting.
 ### Removed
 ### Fixed
 - Crash on btn_up() when multiple submenus with same name where added using newMenu(). Now warns about it when calling newMenu() and aborts the addition to avoid later crashing.
