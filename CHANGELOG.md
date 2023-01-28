@@ -14,6 +14,9 @@
 
 ## [Unreleased][]
 ### Added
+- When trying to add multiple (sub)menus with same name (and different parent), an invisible ID may be added to allow it. '.newMenu()' will return the final name in such case. Set 'bAddInvisibleIds' on menu creation for this.
+- Added new argument to _attachedMenu() named 'popup' which may be used to avoid calling attached menu. It's expected to return true when calling popup.isEnabled() to do so.
+- Added 'onBtnUp' callback called after processing mouse btn_up. Respects the value of this inside the function, if any. It may be used to do something according to the processing of the menu.
 ### Changed
 ### Removed
 ### Fixed
