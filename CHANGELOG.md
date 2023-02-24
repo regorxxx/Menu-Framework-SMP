@@ -28,7 +28,6 @@
 ### Removed
 ### Fixed
 
-
 ## [2.2.0] - 2023-01-28
 ### Added
 - Added new argument to _attachedMenu() named 'popup' which may be used to avoid calling attached menu. It's expected to return true when calling popup.isEnabled() to do so.
