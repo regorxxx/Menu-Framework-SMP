@@ -2,7 +2,7 @@
 
 ## [Table of Contents]
 - [Unreleased](#unreleased)
-- [2.1.1](#211---2022-10-01)
+- [2.2.0](#220---2023-02-24)
 - [2.1.0](#210---2022-05-19)
 - [2.0.1](#201---2021-12-23)
 - [2.0.0](#200---2021-10-14)
@@ -14,10 +14,18 @@
 
 ## [Unreleased][]
 ### Added
-- When trying to add multiple (sub)menus with same name (and different parent), an invisible ID may be added to allow it. '.newMenu()' will return the final name in such case. Set 'bAddInvisibleIds' on menu creation for this.
+### Changed
+### Removed
+### Fixed
+
+## [2.2.0] - 2023-02-24
+### Added
+- getMenuNameFrom() method allows to partial match a submenu from a parent menu using the name minus the invisible ID (at the end). i.e hasMenu() would always fail if not providing the exact ID, but the former would work fine as long as the submenu and parent names are known.
+- findOrNewMenu() method can now be used along invisible IDs to create or retrieve a (sub)menu without need to check if the menu already exists. i.e. if the menu 'Genre' has a submenu called 'Edit' with invisible Ids, instead of storing the name + ID in a variable, findOrNewMenu('Edit', 'Genre') will either create that submenu or retrieve the existing one. It's obviously a shortcut to getMenuNameFrom() or newMenu() within a single line of code.
+### Changed
+- When trying to add multiple (sub)menus with same name (and different parent), an invisible ID may be added to allow it. '.newMenu()' will return the final name in such case. Set 'bAddInvisibleIds' on menu creation for this. It's now the default behavior. The IDs are stripped at the menu drawing step, to ensure they are not incorrectly rendered by some fonts (usually on Wine). In other words, this ensures every entry has an unique idx in SMP terms, while working with just entry names and allowing 'name' duplication as long as the parent differs. The best of both worlds.
 - Added new argument to _attachedMenu() named 'popup' which may be used to avoid calling attached menu. It's expected to return true when calling popup.isEnabled() to do so.
 - Added 'onBtnUp' callback called after processing mouse btn_up. Respects the value of this inside the function, if any. It may be used to do something according to the processing of the menu.
-### Changed
 ### Removed
 ### Fixed
 
@@ -111,7 +119,8 @@
 ### Removed
 ### Fixed
 
-[Unreleased]: https://github.com/regorxxx/Menu-Framework-SMP/compare/v2.1.1...HEAD
+[Unreleased]: https://github.com/regorxxx/Menu-Framework-SMP/compare/v2.2.0...HEAD
+[2.2.0]: https://github.com/regorxxx/Menu-Framework-SMP/compare/v2.1.1...v2.2.0
 [2.1.1]: https://github.com/regorxxx/Menu-Framework-SMP/compare/v2.1.0...v2.1.1
 [2.1.0]: https://github.com/regorxxx/Menu-Framework-SMP/compare/v2.0.1...v2.1.0
 [2.0.1]: https://github.com/regorxxx/Menu-Framework-SMP/compare/v2.0.0...v2.0.1
