@@ -24,6 +24,7 @@
 - New method getMenuNameFrom() which allows to partial match a submenu from a parent menu using the name minus the invisible ID (at the end). i.e hasMenu() would always fail if not providing the exact ID, but the former would work fine as long as the submenu and parent names are known.
 - New method findOrNewMenu() which can now be used along invisible IDs to create or retrieve a (sub)menu without need to check if the menu already exists. i.e. if the menu 'Genre' has a submenu called 'Edit' with invisible Ids, instead of storing the name + ID in a variable, findOrNewMenu('Edit', 'Genre') will either create that submenu or retrieve the existing one. It's obviously a shortcut to getMenuNameFrom() or newMenu() within a single line of code.
 ### Changed
+- Code cleanup. Moved most helpers to private context.
 ### Removed
 ### Fixed
 
