@@ -30,6 +30,7 @@ menu.newMenu('Items...', void(0), void(0), {type: 'handlelist', playlistIdx: plm
 ### Changed
 ### Removed
 ### Fixed
+- Objects not properly parsed at error logging.
 - Entry name not properly set -to the function name- when entryText was a function at addToMenu() method.
 
 ## [2.3.0] - 2023-02-24
