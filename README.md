@@ -20,6 +20,7 @@ Using this framework it would translate into this:
 - Menus are pushed to a list and created automatically on demand, linking the entries to their idx without needing a 'switch' block or leaving holes to ensure idx get enough numbers to expand the script.  
 - The main utility of this helper is greatly reducing coding for simple menus and having both, the menu logic creation and the menus' functions on the same place. Creation order is done following entry/menus addition.
 - Can concatenate multiple menus on btn_up().
+- Coverage of all native SMP features, flags, checks, etc.
 
 ## Usage
 First create the menu object. That's the main one and also includes a 'main menu' to append items to it:
