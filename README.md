@@ -20,6 +20,7 @@ Using this framework it would translate into this:
 - Menus are pushed to a list and created automatically on demand, linking the entries to their idx without needing a 'switch' block or leaving holes to ensure idx get enough numbers to expand the script.  
 - The main utility of this helper is greatly reducing coding for simple menus and having both, the menu logic creation and the menus' functions on the same place. Creation order is done following entry/menus addition.
 - Can concatenate multiple menus on btn_up().
+- Full support for [Context](https://theqwertiest.github.io/foo_spider_monkey_panel/assets/generated_files/docs/html/ContextMenuManager.html) and [Main menu](https://theqwertiest.github.io/foo_spider_monkey_panel/assets/generated_files/docs/html/MainMenuManager.html) managers.
 - Coverage of all native SMP features, flags, checks, etc.
 
 ## Usage
