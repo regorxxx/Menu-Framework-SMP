@@ -2,6 +2,7 @@
 
 ## [Table of Contents]
 - [Unreleased](#unreleased)
+- [2.4.0](#240---2023-03-08)
 - [2.3.0](#230---2023-02-24)
 - [2.2.0](#220---2023-01-28)
 - [2.1.0](#210---2022-05-19)
@@ -18,6 +19,18 @@
 ### Changed
 ### Removed
 ### Fixed
+
+## [2.4.0] - 2023-03-08
+### Added
+- Support for [contextual menus](https://theqwertiest.github.io/foo_spider_monkey_panel/assets/generated_files/docs/html/ContextMenuManager.html) and [main menus](https://theqwertiest.github.io/foo_spider_monkey_panel/assets/generated_files/docs/html/MainMenuManager.html) at newMenu(menuName, subMenuFrom, flags, context /*{type, playlistIdx}*/, main /*{type}*/) method, by setting the 'context' or 'main' arguments. Type may be either 'handlelist', 'playlist', or 'nowplaying' in the case of contextual menus; for main menus, type must be one of the following: 'file', 'view', 'edit', 'playback', 'library', 'help'. All ids are handled under the hood. Creating a contextual menu is as easier as:
+```
+// If no playlistIdx is given then it uses the active playlist
+menu.newMenu('Items...', void(0), void(0), {type: 'handlelist', playlistIdx: plman.FindPlaylist(pls.nameId)});
+```
+### Changed
+### Removed
+### Fixed
+- Entry name not properly set -to the function name- when entryText was a function at addToMenu() method.
 
 ## [2.3.0] - 2023-02-24
 ### Added
@@ -127,7 +140,8 @@
 ### Removed
 ### Fixed
 
-[Unreleased]: https://github.com/regorxxx/Menu-Framework-SMP/compare/v2.3.0...HEAD
+[Unreleased]: https://github.com/regorxxx/Menu-Framework-SMP/compare/v2.4.0...HEAD
+[2.4.0]: https://github.com/regorxxx/Menu-Framework-SMP/compare/v2.3.0...v2.4.0
 [2.3.0]: https://github.com/regorxxx/Menu-Framework-SMP/compare/v2.2.0...v2.3.0
 [2.2.0]: https://github.com/regorxxx/Menu-Framework-SMP/compare/v2.1.1...v2.2.0
 [2.1.1]: https://github.com/regorxxx/Menu-Framework-SMP/compare/v2.1.0...v2.1.1
