@@ -16,6 +16,7 @@
 
 ## [Unreleased][]
 ### Added
+- New argument 'bLogEntries' on menu object creation which allows to enable/disable the logging of clicked menu entries.
 ### Changed
 ### Removed
 ### Fixed
