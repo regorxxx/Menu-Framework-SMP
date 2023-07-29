@@ -17,7 +17,12 @@
 ## [Unreleased][]
 ### Added
 - New argument 'bLogEntries' on menu object creation which allows to enable/disable the logging of clicked menu entries.
+- New argument 'bInit'. Set to false to directly replace with a contextual/main menu obj.
+- New method retry() to call last entry with configurable arguments.
 ### Changed
+- Improved contextual menu for handle lists with a header at top (playlist name + # tracks).
+- Exposed getNextId() method, to retrieve invisible Ids.
+- Improved error reporting for check menus.
 ### Removed
 ### Fixed
 
