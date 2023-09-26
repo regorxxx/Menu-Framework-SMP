@@ -1,8 +1,8 @@
 ﻿'use strict';
-//29/07/23
+//26/09/23
 
 /* 
-	Contextual Menu helper v2.4.0
+	Contextual Menu helper v2.5.0
 	Helper to create contextual menus on demand on panels without needing to create specific methods for
 	every script, calculate IDs, etc. Menus are pushed to a list and created automatically, linking the entries
 	to their idx without needing a 'switch' block or leaving holes to ensure idx get enough numbers to expand the script.
@@ -98,6 +98,11 @@ function _menu({bInit = true, bSupressDefaultMenu = true, properties = null, iMa
 	this.getNumEntries = () => {return entryArr.length;};
 	this.getEntries = () => {return [...entryArr];}; // To get all menu entries, but those created by conditional menus are not set yet!
 	this.getEntriesAll = (object, bindArgs = null /*{pos: -1, args: null}*/) => {this.initMenu(object, bindArgs); const copy = [...entryArr]; this.clear(); return copy;}; // To get all menu entries, even cond ones!
+	this.getLastEntry = () => {return (entryArr.length !== 0 ? entryArr[entryArr.length - 1] : null);};
+	this.isLastEntry = (name, type = 'entry' /* entry, cond, menu*/) => { // Check if last entry matches a name by type easily
+		const last = this.getLastEntry();
+		return last && ((type === 'entry' || type === 'cond' && last.condFunc) && last.entryText === name || type === 'menu' && last.bIsMenu && last.menuName === name);
+	};
 	this.getMenus = () => {return [...menuArr];};
 	this.getMainMenuName = () => {return menuArr[0].menuName;};
 	this.hasMenu = (menuName, subMenuFrom = '') => {return (menuArr.findIndex((menu) => {return menu.menuName === menuName && (subMenuFrom.length ? menu.subMenuFrom === subMenuFrom : true);}) !== -1);};
@@ -336,6 +341,8 @@ function _menu({bInit = true, bSupressDefaultMenu = true, properties = null, iMa
 								contextMenu = fb.CreateContextMenuManager();
 								contextMenu.InitContext(playlistItems);
 								contextMenu.BuildMenu(this.getMenu(subMenuName), contextIdx, contextIdx + idxInitialOffset);
+							} else {
+								this.addToMenu({entryText: '   - No tracks -   ', menuName: subMenuName, flags: MF_GRAYED});
 							}
 						} else if (type === 'playlist') { // InitContextPlaylist()
 							contextMenu = fb.CreateContextMenuManager();
@@ -474,6 +481,8 @@ function _menu({bInit = true, bSupressDefaultMenu = true, properties = null, iMa
 	};
 	
 	// Helpers
+	this.isSeparator = (obj) => {return ((obj.entryText || obj.name) === 'separator' || (obj.entryText || obj.name) === 'sep');}
+	this.isNotSeparator = (obj) => {return !this.isSeparator(obj);}
 	this.getHiddenCharsRegEx = () => {return hiddenCharsRegEx;}
 	this.getNextId = () => {return invsId(true);}
 	const hiddenChars = ['\u200b','\u200c','\u200d','\u200e'];

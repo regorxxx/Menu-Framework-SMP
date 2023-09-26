@@ -19,6 +19,12 @@
 - New argument 'bLogEntries' on menu object creation which allows to enable/disable the logging of clicked menu entries.
 - New argument 'bInit'. Set to false to directly replace with a contextual/main menu obj.
 - New method retry() to call last entry with configurable arguments.
+- New method isSeparator() and isNotSeparator() to be used along newCheckMenu(), when checking the index of an array of options (so it filters the separators). Looks for properties named 'entryText' or 'name. For ex:
+```
+const options = [{name: 'My entry', val: true}, {name: 'sep'}, {name: 'My other entry', val: true}];
+options.forEach(() => ...); // Create menu entries, etc.
+menu.newCheckMenu(menuName, options[0].name, options[options.length - 1].name, () => {return options.filter(menu.isNotSeparator).findIndex((opt) => opt.val === val;});
+```
 ### Changed
 - Improved contextual menu for handle lists with a header at top (playlist name + # tracks).
 - Exposed getNextId() method, to retrieve invisible Ids.
