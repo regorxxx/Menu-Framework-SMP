@@ -2,6 +2,7 @@
 
 ## [Table of Contents]
 - [Unreleased](#unreleased)
+- [2.5.0](#250---2023-09-26)
 - [2.4.0](#240---2023-03-08)
 - [2.3.0](#230---2023-02-24)
 - [2.2.0](#220---2023-01-28)
@@ -15,6 +16,12 @@
 - [1.0.0](#100---2021-05-05)
 
 ## [Unreleased][]
+### Added
+### Changed
+### Removed
+### Fixed
+
+## [2.5.0] - 2023-09-26
 ### Added
 - New argument 'bLogEntries' on menu object creation which allows to enable/disable the logging of clicked menu entries.
 - New argument 'bInit'. Set to false to directly replace with a contextual/main menu obj.
@@ -153,7 +160,8 @@ menu.newMenu('Items...', void(0), void(0), {type: 'handlelist', playlistIdx: plm
 ### Removed
 ### Fixed
 
-[Unreleased]: https://github.com/regorxxx/Menu-Framework-SMP/compare/v2.4.0...HEAD
+[Unreleased]: https://github.com/regorxxx/Menu-Framework-SMP/compare/v2.5.0...HEAD
+[2.5.0]: https://github.com/regorxxx/Menu-Framework-SMP/compare/v2.4.0...v2.5.0
 [2.4.0]: https://github.com/regorxxx/Menu-Framework-SMP/compare/v2.3.0...v2.4.0
 [2.3.0]: https://github.com/regorxxx/Menu-Framework-SMP/compare/v2.2.0...v2.3.0
 [2.2.0]: https://github.com/regorxxx/Menu-Framework-SMP/compare/v2.1.1...v2.2.0
