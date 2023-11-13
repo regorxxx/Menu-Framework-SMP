@@ -20,6 +20,9 @@
 ### Changed
 ### Removed
 ### Fixed
+- "menuName.indexOf is not a function" error at newMenu() due to typo on variable type checks.
+- concat() not working properly with menu objects with sub-menus or menu checks.
+- btn_up(x, y, object, ....) not working properly with menu objects with sub-menus or menu checks.
 
 ## [2.5.0] - 2023-09-26
 ### Added
