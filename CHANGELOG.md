@@ -22,7 +22,7 @@
 ### Removed
 ### Fixed
 
-## [2.5.0] - 2023-09-26
+## [2.6.0] - 2023-11-28
 ### Added
 - New method .newCheckMenuLast(boolFunc),sShorthand for .newCheckMenu(menuName, entryTextA, void(0), boolFunc), where the entry is automatically retrieved from the last one added to the menu.
 ### Changed
@@ -171,7 +171,8 @@ menu.newMenu('Items...', void(0), void(0), {type: 'handlelist', playlistIdx: plm
 ### Removed
 ### Fixed
 
-[Unreleased]: https://github.com/regorxxx/Menu-Framework-SMP/compare/v2.5.0...HEAD
+[Unreleased]: https://github.com/regorxxx/Menu-Framework-SMP/compare/v2.6.0...HEAD
+[2.6.0]: https://github.com/regorxxx/Menu-Framework-SMP/compare/v2.5.0...v2.6.0
 [2.5.0]: https://github.com/regorxxx/Menu-Framework-SMP/compare/v2.4.0...v2.5.0
 [2.4.0]: https://github.com/regorxxx/Menu-Framework-SMP/compare/v2.3.0...v2.4.0
 [2.3.0]: https://github.com/regorxxx/Menu-Framework-SMP/compare/v2.2.0...v2.3.0
