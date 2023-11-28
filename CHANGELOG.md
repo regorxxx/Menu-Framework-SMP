@@ -2,6 +2,7 @@
 
 ## [Table of Contents]
 - [Unreleased](#unreleased)
+- [2.6.0](#260---2023-11-28)
 - [2.5.0](#250---2023-09-26)
 - [2.4.0](#240---2023-03-08)
 - [2.3.0](#230---2023-02-24)
@@ -17,6 +18,13 @@
 
 ## [Unreleased][]
 ### Added
+### Changed
+### Removed
+### Fixed
+
+## [2.5.0] - 2023-09-26
+### Added
+- New method .newCheckMenuLast(boolFunc),sShorthand for .newCheckMenu(menuName, entryTextA, void(0), boolFunc), where the entry is automatically retrieved from the last one added to the menu.
 ### Changed
 ### Removed
 ### Fixed
