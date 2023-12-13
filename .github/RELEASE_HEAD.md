@@ -1,0 +1,1 @@
+See full [changelog here](https://github.com/regorxxx/Menu-Framework-SMPP/blob/main/CHANGELOG.md).
