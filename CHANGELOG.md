@@ -18,13 +18,17 @@
 
 ## [Unreleased][]
 ### Added
+- JSDoc documentation for all methods.
+- New _createSubMenuEditEntries() function to programmatically create editable submenus from a list. See [this](https://github.com/regorxxx/Playlist-Tools-SMP/blob/main/buttons/buttons_search_quickmatch.js) for an usage example.
+- New _Macros() constructor which may be linked to a menu object to record and run multiple menu entries automatically. See [this](https://github.com/regorxxx/Playlist-Tools-SMP/blob/main/main/playlist_tools/playlist_tools_menu_macros.js) for an usage example.
 ### Changed
+- General code cleanup.
 ### Removed
 ### Fixed
 
 ## [2.6.0] - 2023-11-28
 ### Added
-- New method .newCheckMenuLast(boolFunc),sShorthand for .newCheckMenu(menuName, entryTextA, void(0), boolFunc), where the entry is automatically retrieved from the last one added to the menu.
+- New method .newCheckMenuLast(boolFunc), shorthand for .newCheckMenu(menuName, entryTextA, void(0), boolFunc), where the entry is automatically retrieved from the last one added to the menu.
 ### Changed
 ### Removed
 ### Fixed
