@@ -27,33 +27,33 @@ Using this framework it would translate into this:
 First create the menu object. That's the main one and also includes a 'main menu' to append items to it:
 ```javascript
 const menu = new _menu();
-menu.newEntry({menu, entryText: 'hello', func: () => {console.log('hello')}}); // Shorthand notation
-menu.newEntry({entryText: 'hello2', func: () => {console.log('hello2')}}); // Or omit the menu, to append directly to main one
-menu.newEntry({entryText: 'sep'}); // You can also add a separator
+menu.newEntry({ menuName: menu.getMainMenuName(), entryText: 'An entry', func: () => console.log('hello') }); // Append to main menu
+menu.newEntry({ entryText: 'Another entry', func: () => console.log('hello2') }); // Or omit the menuName, to append directly to main one
+menu.newSeparator(); // You can also add a separator
 ```
 
 Then, you may want to create sub-menus linked to it. To do that, just create a new menu entry within the object:
 ```javascript
 const subMenu = menu.newMenu('This is a submenu'); // It will be added just after the last declared entry!
-menu.newEntry({menuName: subMenu, entryText: 'This is my func', func: yourFunc);
+menu.newEntry({ menuName: subMenu, entryText: 'This one is nested', func: () => doSomething() );
 ```
 
 Sub-menus can also be dynamically created:
 ```javascript
 var bSubMenu = true;
-const funct = () => {return (bSubMenu) ? 'SubMenu 1' : 'SubMenu 2';};
-menu.newMenu(funct);
-menu.newEntry({menuName: funct, entryText: 'Change SubMenu', func: () => {bSubMenu = !bSubMenu}});
-menu.newEntry({menuName: funct, entryText:'Hola 3', func: () => {console.log('Hola3')}, flags: () => {return (bSubMenu) ? MF_STRING : MF_GRAYED}});
+const nameFunc = () => bSubMenu ? 'SubMenu 1' : 'SubMenu 2';
+menu.newMenu(nameFunc);
+menu.newEntry({ menuName: nameFunc, entryText: 'Change SubMenu', func: () => bSubMenu = !bSubMenu});
+menu.newEntry({ menuName: nameFunc, entryText: 'Nested entry', func: () => console.log('Clicked!'), flags: () => bSubMenu ? MF_STRING : MF_GRAYED });
 ```
 
 Finally, lets call it with a callback:
 ```javascript
-function on_mouse_rbtn_up(x, y) {return menu.btn_up(x, y);}
+function on_mouse_rbtn_up(x, y) { return menu.btn_up(x, y); }
 ```
 Or an [event listener](https://github.com/regorxxx/Callbacks-Framework-SMP):
 ```javascript
-addEventListener('on_mouse_rbtn_up', menu.btn_up);
+addEventListener('on_mouse_rbtn_up', (x, y) => menu.btn_up(x,y));
 ```
 
 ![menu_framework_01](https://user-images.githubusercontent.com/83307074/117211823-081c7500-ade9-11eb-9178-f063539809a4.gif)
