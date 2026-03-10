@@ -58,7 +58,7 @@ addEventListener('on_mouse_rbtn_up', (x, y) => menu.btn_up(x,y));
 
 ![menu_framework_01](https://user-images.githubusercontent.com/83307074/117211823-081c7500-ade9-11eb-9178-f063539809a4.gif)
 
-There are more usage examples on the 'examples' folder and full documentation on the header of 'menu_xxx.js'.
+There are more usage examples on the 'examples' folder and full documentation at 'menu_xxx.js' (JSDoc and [VSCodium](https://vscodium.com/)).
 
 ## Other implementations
  1. [Playlist-Tools-SMP](https://github.com/regorxxx/Playlist-Tools-SMP): Different tools for [foobar2000](https://www.foobar2000.org). The dynamic configurable menu is built using this.
