@@ -2,7 +2,7 @@
 
 ## [Table of Contents]
 - [Unreleased](#unreleased)
-- [2.7.0](#270---2026-03-10)
+- [3.0.0](#300---2026-03-10)
 - [2.6.0](#260---2023-11-28)
 - [2.5.0](#250---2023-09-26)
 - [2.4.0](#240---2023-03-08)
@@ -24,7 +24,7 @@
 ### Removed
 ### Fixed
 
-## [2.7.0] - 2026-03-10
+## [3.0.0] - 2026-03-10
 ### Added
 - JSDoc documentation for all methods.
 - New _createSubMenuEditEntries() function to programmatically create editable submenus from a list. See [this](https://github.com/regorxxx/Playlist-Tools-SMP/blob/main/buttons/buttons_search_quickmatch.js) for an usage example.
@@ -183,8 +183,8 @@ menu.newMenu('Items...', void(0), void(0), {type: 'handlelist', playlistIdx: plm
 ### Removed
 ### Fixed
 
-[Unreleased]: https://github.com/regorxxx/Menu-Framework-SMP/compare/v2.7.0...HEAD
-[2.7.0]: https://github.com/regorxxx/Menu-Framework-SMP/compare/v2.6.0...v2.7.0
+[Unreleased]: https://github.com/regorxxx/Menu-Framework-SMP/compare/v3.0.0...HEAD
+[3.0.0]: https://github.com/regorxxx/Menu-Framework-SMP/compare/v2.6.0...v3.0.0
 [2.6.0]: https://github.com/regorxxx/Menu-Framework-SMP/compare/v2.5.0...v2.6.0
 [2.5.0]: https://github.com/regorxxx/Menu-Framework-SMP/compare/v2.4.0...v2.5.0
 [2.4.0]: https://github.com/regorxxx/Menu-Framework-SMP/compare/v2.3.0...v2.4.0
