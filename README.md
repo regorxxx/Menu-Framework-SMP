@@ -61,13 +61,15 @@ addEventListener('on_mouse_rbtn_up', (x, y) => menu.btn_up(x,y));
 There are more usage examples on the 'examples' folder and full documentation at 'menu_xxx.js' (JSDoc and [VSCodium](https://vscodium.com/)).
 
 ## Other implementations
- 1. [Playlist-Tools-SMP](https://github.com/regorxxx/Playlist-Tools-SMP): Different tools for [foobar2000](https://www.foobar2000.org). The dynamic configurable menu is built using this.
- 2. [Playlist-Manager-SMP](https://github.com/regorxxx/Playlist-Manager-SMP): A playlist manager for [foobar2000](https://www.foobar2000.org). The static menus use this.
+ 1. [Infinity-Tools-SMP](https://github.com/regorxxx/Infinity-Tools-SMP): Different tools for [foobar2000](https://www.foobar2000.org). The dynamic configurable menu is using this.
+ 2. [Playlist-Manager-SMP](https://github.com/regorxxx/Playlist-Manager-SMP): Playlist manager for [foobar2000](https://www.foobar2000.org). All menus use this.
+ 3. [Timeline-SMP](https://github.com/regorxxx/Timeline-SMP): Interactive Timeline of your library for [foobar2000](https://www.foobar2000.org). All button menus use this.
+ 4. ... any of my foobar2000 scripts ...
 
 ![Animation9](https://user-images.githubusercontent.com/83307074/116756215-44239480-a9fb-11eb-8489-b56a178c70f4.gif)
 
 ## Installation
-Since the framework only requires 1 file, i.e. the main one, you can simply include it along any other script where you will use the menu.
+Since the framework only requires 1 file, i.e. the main one (menu_xxx.js), you can simply include it along any other script where you will use the menu. The other files are non-needed helpers which may be used on more advanced scripts (they have docs but don't expect a guide to use them).
 
 ![carbon(5)](https://user-images.githubusercontent.com/83307074/118840446-ed510280-b8b6-11eb-894d-e7d834d4b3b9.png)
 
