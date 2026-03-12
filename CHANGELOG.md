@@ -2,6 +2,7 @@
 
 ## [Table of Contents]
 - [Unreleased](#unreleased)
+- [3.0.1](#301---2026-03-12)
 - [3.0.0](#300---2026-03-10)
 - [2.6.0](#260---2023-11-28)
 - [2.5.0](#250---2023-09-26)
@@ -24,11 +25,18 @@
 ### Removed
 ### Fixed
 
+## [3.0.1] - 2026-03-12
+### Added
+### Changed
+### Removed
+### Fixed
+- File helper include typo at menu_xxx_extras.js.
+
 ## [3.0.0] - 2026-03-10
 ### Added
 - JSDoc documentation for all methods.
-- New _createSubMenuEditEntries() function to programmatically create editable submenus from a list. See [this](https://github.com/regorxxx/Playlist-Tools-SMP/blob/main/buttons/buttons_search_quickmatch.js) for an usage example.
-- New _Macros() constructor which may be linked to a menu object to record and run multiple menu entries automatically. See [this](https://github.com/regorxxx/Playlist-Tools-SMP/blob/main/main/playlist_tools/playlist_tools_menu_macros.js) for an usage example.
+- New _createSubMenuEditEntries() function to programmatically create editable submenus from a list. See [this](https://github.com/regorxxx/Infinity-Tools-SMP/blob/main/buttons/buttons_search_quickmatch.js) for an usage example.
+- New _Macros() constructor which may be linked to a menu object to record and run multiple menu entries automatically. See [this](https://github.com/regorxxx/Infinity-Tools-SMP/blob/main/main/playlist_tools/playlist_tools_menu_macros.js) for an usage example.
 ### Changed
 - General code cleanup.
 ### Removed
@@ -183,7 +191,8 @@ menu.newMenu('Items...', void(0), void(0), {type: 'handlelist', playlistIdx: plm
 ### Removed
 ### Fixed
 
-[Unreleased]: https://github.com/regorxxx/Menu-Framework-SMP/compare/v3.0.0...HEAD
+[Unreleased]: https://github.com/regorxxx/Menu-Framework-SMP/compare/v3.0.1...HEAD
+[3.0.1]: https://github.com/regorxxx/Menu-Framework-SMP/compare/v3.0.0...v3.0.1
 [3.0.0]: https://github.com/regorxxx/Menu-Framework-SMP/compare/v2.6.0...v3.0.0
 [2.6.0]: https://github.com/regorxxx/Menu-Framework-SMP/compare/v2.5.0...v2.6.0
 [2.5.0]: https://github.com/regorxxx/Menu-Framework-SMP/compare/v2.4.0...v2.5.0
